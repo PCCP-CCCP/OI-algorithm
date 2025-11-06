@@ -1,8 +1,6 @@
 #include<iostream>
 #include<cstdio>
 #include<queue>
-#include<cstring>
-#include<cmath>
 using namespace std;
 const int N=1e5+10;
 int n,cnt,num,last,ans[N<<1];
@@ -38,11 +36,11 @@ void update_tree(int now){
     }
     if(tree[now].l){
         update_tree(tree[now].l);
-        tree[now].yet=(tree[now].yet|tree[tree[now].l].yet);
+        tree[now].yet|=tree[tree[now].l].yet;
     }
     if(tree[now].r){
         update_tree(tree[now].r);
-        tree[now].yet=(tree[now].yet|tree[tree[now].r].yet);
+        tree[now].yet|=tree[tree[now].r].yet;
     }
     return;
 }
