@@ -5,7 +5,7 @@
 #include<fcntl.h>
 #define N 100000
 int hit[N],size;
-inline int get_random_bytes(void *buffer,size_t size) {
+int get_random_bytes(void *buffer,size_t size) {
     int fd=open("/dev/urandom",O_RDONLY);
     if(fd==-1){
         return -1;
@@ -14,12 +14,12 @@ inline int get_random_bytes(void *buffer,size_t size) {
     close(fd);
     return (result==(ssize_t)size)?0:-1;
 }
-inline int random_range(int min,int max) {
+int random_range(int min,int max) {
     unsigned int rand_val;
     get_random_bytes(&rand_val,sizeof(rand_val));
     return min+(rand_val%(max-min+1));
 }
-inline int check(int x){
+int check(int x){
     for(int i=0;i<size;i++){
         if(hit[i]==x){
             return 1;
@@ -35,7 +35,8 @@ int get(int max){
     do{
         x=random_range(1,max);
         if(!check(x)){
-            hit[++size]=x;
+            hit[size]=x;
+            ++size;
             return x;
         }
     }
