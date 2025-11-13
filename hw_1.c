@@ -4,6 +4,12 @@
 void faliure(){
     printf("Sorry.This function is currently not supported.\n");
 }
+int triangle_check(double a,double b,double c){
+    if(a+b<=c||a+c<=b||b+c<=a){
+        return 0;
+    }
+    return 1;
+}
 void triangle_area(double a,double b,double c){
     double s,area;
     s=(a+b+c)/2;
@@ -15,8 +21,12 @@ void triangle(){
     printf("Enter the side lengths of the triangle\n");
     double a,b,c;
     scanf("%lf%lf%lf",&a,&b,&c);
-    printf("Which data do you want to calculate?[area(A)]");
-    //getchar();
+    if(!triangle_check(a,b,c)){
+        printf("The diagram is illegal!\n");
+        return;
+    }
+    printf("Which data do you want to calculate?[area(A)]\n");
+    getchar();
     ch=getchar();
     if(ch=='A'){
         triangle_area(a,b,c);
@@ -38,7 +48,7 @@ void circle(){
     printf("Enter the side radius of the circle\n");
     double r;
     scanf("%lf",&r);
-    printf("Which data do you want to calculate?[perimeter(P)/area(A)]");
+    printf("Which data do you want to calculate?[perimeter(P)/area(A)]\n");
     getchar();
     ch=getchar();
     if(ch=='P'){
@@ -53,14 +63,13 @@ void circle(){
 }
 int main(){
     char ch;
-    printf("Start\nAre you sure to start the program? [Y/N]");
-    getchar();
+    printf("Start\nAre you sure to start the program?[Y/N]\n");
     ch=getchar();
-    if(ch=='N'){
+    if(ch!='Y'){
         return 0;
     }
     do{
-        printf("Please select the diagram you want to calculate.[triangle(T)/circle(C)]");
+        printf("Please select the diagram you want to calculate.[triangle(T)/circle(C)]\n");
         getchar();
         ch=getchar();
         if(ch=='T'){
@@ -72,7 +81,7 @@ int main(){
         else{
             faliure();
         }
-        printf("Do you want to continue?[Y/N]");
+        printf("Do you want to continue?[Y/N]\n");
         getchar();
         ch=getchar();
     }
