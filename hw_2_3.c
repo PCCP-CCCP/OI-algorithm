@@ -64,5 +64,5 @@ int main(){
         getchar();
         ch=getchar();
     }
-    while(ch=='Y');
+    while(ch=='Y'||ch=='y');
 }

@@ -16,6 +16,9 @@ int right_triangle(double a,double b,double c){
     if(a*a==b*b+c*c||b*b==a*a+c*c||c*c==a*a+b*b){
         return 1;
     }
+    if(fabs(a*a-b*b-c*c)<=1e-7||fabs(b*b-a*a-c*c)<=1e-7||fabs(c*c-a*a-b*b)<=1e-7){
+        return 1;
+    }
     return 0;
 }
 int main(){
@@ -51,5 +54,5 @@ int main(){
         getchar();
         ch=getchar();
     }
-    while(ch=='Y');
+    while(ch=='Y'||ch=='y');
 }
