@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南大搜索</title>
+    <!--内联CSS-->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease;
+        }
+        /* 导航栏底色设置*/
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            z-index: 1000;
+        }
+        /* 导航栏字体设置*/
+        .header a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #000000;
+            opacity: 0.5;
+            font-size: 14px;
+        }
+        /*主体！*/
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+        /*实时时间显示设置*/
+        .time-display {
+            font-size: 72px;
+            margin-bottom: 30px;
+            color: rgb(255, 255, 255);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .date-display {
+            font-size: 25px;
+            margin-bottom: 0px;
+            color: rgb(255, 255, 255);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        /*搜索区设置*/
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+        /*搜索框设置*/
+        .search-box {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        /*搜索图标设置*/
+        .search-icons {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 15px;
+        }
+        /*鼠标移动动画设置*/
+        .search-icons i {
+            cursor: pointer;
+            color: #666;
+            font-size: 20px;
+        }
+        /*悬停变色设置*/
+        .search-icons i:hover {
+            color: #1a73e8;
+        }
+        /*搜索发现区设置*/
+        .search-discovery {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+        /*搜索发现标题设置*/
+        .search-discovery h3 {
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .discovery-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        /*搜索发现设置*/
+        .discovery-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .discovery-item:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+        /*清楚历史记录部分设置*/
+        .clear-history {
+            margin-top: 15px;
+            color: white;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!--导航栏主体-->
+    <div class="header">
+        <a href="http://127.0.0.1:5500/myself_introduction.html">my introduction</a>
+        <a href="http://127.0.0.1:5500/my_education.html">my education</a>
+        <a href="http://127.0.0.1:5500/my_hobbies.html">my hobbies</a>
+    </div>
+    <!--正文-->
+    <div class="main">
+        <div class="date-display" id="dateDisplay"></div>
+        <div class="time-display" id="timeDisplay"></div>
+        <img src="https://www.ncu.edu.cn/images/logo.png" alt="嘿，你的南大本升专了" width="280">
+        <span style="color: white; font-size: 35px;"><i><b>NanChang University searching page</b></i></span>
+        <br>
+        <br>
+        <div class="search-container">
+            <input type="text" class="search-box" id="searchInput" placeholder="please keybord what you want to search">
+            <div class="search-icons">
+                <i class="fas fa-search" onclick="handleSearch()"></i>
+                <i class="fas fa-history" onclick="showLastSearch()"></i>
+                <i class="fas fa-random" onclick="showRandomHint()"></i>
+            </div>
+        </div>
+        <div class="search-discovery">
+            <h3>searching to find</h3>
+            <div class="discovery-items" id="discoveryItems">
+            </div>
+            <div class="clear-history" onclick="clearSearchHistory()">clear history</div>
+        </div>
+    </div>
+    <script>
+        // 初始化变量
+        let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        let lastSearch = localStorage.getItem('lastSearch') || '';
+        const randomHints = ['just nothing'];
+        const presetDiscoveries = ['my introduction','my education','my hobbies'];
+        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Yhursday', 'Friday', 'Saturday'];
+        // 初始化函数
+        function init() {
+            updateDateTime();//更新时间
+            setInterval(updateDateTime, 1000);//每秒更新
+            loadBackground();//加载背景图片
+            renderDiscoveryItems();
+        }
+        // 更新时间显示
+        function updateDateTime() {
+            const now = new Date();
+            //const timeString = now.toLocaleTimeString('zh-CN');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const weekday = weekdays[now.getDay()];
+            const dateString = `${year}.${month}.${day} ${weekday}`;
+            document.getElementById('timeDisplay').textContent = timeString;
+            document.getElementById('dateDisplay').textContent = dateString;
+        }
+        // 加载背景图片
+        function loadBackground() {
+            document.body.style.backgroundImage = `url(https://cdn.luogu.com.cn/upload/image_hosting/u8ojj5ke.png)`;
+        }
+        // 处理搜索
+        function handleSearch() {
+            const searchText = document.getElementById('searchInput').value.trim();
+            if (!searchText) {
+                alert('请输入搜索内容');
+                return;
+            }
+            // 保存搜索记录
+            saveSearchHistory(searchText);
+            lastSearch = searchText;
+            localStorage.setItem('lastSearch', searchText);
+            // 跳转到搜索引擎
+            window.open(`https://www.bing.com/search?q=${encodeURIComponent(searchText)}`, '_blank');
+            // 清空输入框
+            document.getElementById('searchInput').value = '';
+        }
+        // 保存搜索历史
+        function saveSearchHistory(searchText) {
+            // 避免重复添加
+            if (!searchHistory.includes(searchText)) {
+                searchHistory.unshift(searchText);
+                // 限制历史记录数量
+                if (searchHistory.length > 10) {
+                    searchHistory.pop();
+                }
+                localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+                renderDiscoveryItems();
+            }
+        }
+        // 渲染搜索发现项
+        function renderDiscoveryItems() {
+            const container = document.getElementById('discoveryItems');
+            container.innerHTML = '';
+            // 合并预设和搜索历史
+            const allItems = [...presetDiscoveries, ...searchHistory];
+            allItems.forEach(item => {
+                const displayText = item.length > 5 ? item.substring(0, 5) + '...' : item;
+                const div = document.createElement('div');
+                div.className = 'discovery-item';
+                div.textContent = displayText;
+                div.title = item;
+                div.onclick = () => searchFromDiscovery(item);
+                container.appendChild(div);
+            });
+        }
+        // 从搜索发现进行搜索
+        function searchFromDiscovery(text) {
+            document.getElementById('searchInput').value = text;
+            handleSearch();
+        }
+        // 显示上一次搜索内容
+        function showLastSearch() {
+            if (lastSearch) {
+                document.getElementById('searchInput').value = lastSearch;
+            } else {
+                alert('暂无搜索历史');
+            }
+        }
+        // 显示随机提示
+        function showRandomHint() {
+            const randomIndex = Math.floor(Math.random() * randomHints.length);
+            document.getElementById('searchInput').value = randomHints[randomIndex];
+        }
+        // 清空搜索历史
+        function clearSearchHistory() {
+            if (confirm('确定要清空所有搜索记录吗？')) {
+                searchHistory = [];
+                localStorage.removeItem('searchHistory');
+                renderDiscoveryItems();
+            }
+        }
+        // 回车键搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+        // 页面加载时初始化
+        window.onload = init;
+    </script>
+</body>
+</html>
