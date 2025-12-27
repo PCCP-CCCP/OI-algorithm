@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB机械键盘 - CENTRE COM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        .header { background: #000; color: #fff; padding: 20px; text-align: center; }
+        .header h1 { font-size: 3rem; letter-spacing: 2px; }
+        .header a { color: #fff; text-decoration: none; display: inline-block; margin-top: 10px; }
+        .product-detail { display: flex; max-width: 1200px; margin: 30px auto; gap: 30px; padding: 0 20px; }
+        .product-img { flex: 1; }
+        .product-img img { width: 100%; height: auto; border-radius: 8px; }
+        .product-info { flex: 1; }
+        .product-info h2 { font-size: 2rem; margin-bottom: 15px; }
+        .original-price { text-decoration: line-through; color: #888; margin-bottom: 10px; }
+        .sale-price { color: #ff0000; font-size: 2.2rem; font-weight: bold; margin-bottom: 20px; }
+        .features { margin: 20px 0; }
+        .features h3 { margin-bottom: 10px; }
+        .features ul { list-style: disc; padding-left: 20px; }
+        .features li { margin-bottom: 5px; }
+        .btn { display: inline-block; background: #000; color: #fff; padding: 15px 30px; text-decoration: none; border-radius: 4px; margin-top: 20px; font-size: 1.1rem; }
+        .btn:hover { background: #333; }
+        .related { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .related h3 { margin-bottom: 20px; }
+        .related-products { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 10px; }
+        .related-card { min-width: 200px; border: 1px solid #ddd; padding: 10px; text-align: center; border-radius: 8px; }
+        .related-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; }
+        .related-card a { text-decoration: none; color: #000; }
+        .footer { background: #000; color: #fff; text-align: center; padding: 15px; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CENTRE COM</h1>
+        <a href="index.html">← 返回首页</a>
+    </div>
+
+    <div class="product-detail">
+        <div class="product-img">
+            <img src="https://picsum.photos/id/4/800/600" alt="RGB机械键盘">
+        </div>
+        <div class="product-info">
+            <h2>RGB机械键盘 MECHA-87</h2>
+            <div class="original-price">原价: $459</div>
+            <div class="sale-price">现价: $379</div>
+            <p>87键紧凑布局，Cherry MX机械轴体，1680万色RGB灯光，全键无冲设计，适合游戏和办公。</p>
+            
+            <div class="features">
+                <h3>核心配置</h3>
+                <ul>
+                    <li>轴体：Cherry MX 红轴/青轴/茶轴可选</li>
+                    <li>键帽：PBT双色注塑键帽（耐磨不打油）</li>
+                    <li>灯光：1680万色RGB，支持自定义宏</li>
+                    <li>按键：全键无冲，支持热插拔</li>
+                    <li>连接：有线USB-C + 2.4G无线 + 蓝牙5.1</li>
+                    <li>续航：无线模式续航60天</li>
+                </ul>
+            </div>
+
+            <div class="features">
+                <h3>特色功能</h3>
+                <ul>
+                    <li>金属面板质感</li>
+                    <li>可编程快捷键</li>
+                    <li>防水防尘设计</li>
+                    <li>兼容多系统（Windows/Mac）</li>
+                </ul>
+            </div>
+
+            <a href="#" class="btn">立即购买</a>
+            <a href="#" class="btn" style="background: #ff0000; margin-left: 10px;">点击自提</a>
+        </div>
+    </div>
+
+    <div class="related">
+        <h3>相关商品</h3>
+        <div class="related-products">
+            <div class="related-card">
+                <a href="headset.html">
+                    <img src="https://picsum.photos/id/3/200/150" alt="耳机">
+                    <h4>降噪游戏耳机</h4>
+                    <p style="color: #ff0000; font-weight: bold;">$399</p>
+                </a>
+            </div>
+            <div class="related-card">
+                <a href="laptop.html">
+                    <img src="https://picsum.photos/id/1/200/150" alt="笔记本">
+                    <h4>高性能游戏笔记本</h4>
+                    <p style="color: #ff0000; font-weight: bold;">$2,499</p>
+                </a>
+            </div>
+            <div class="related-card">
+                <a href="monitor.html">
+                    <img src="https://picsum.photos/id/5/200/150" alt="显示器">
+                    <h4>4K高清电竞显示器</h4>
+                    <p style="color: #ff0000; font-weight: bold;">$699</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>ACCEPTS AFTERPAY | FREE SHIPPING ON ORDERS OVER $500 | OPEN 7 DAYS A WEEK</p>
+    </div>
+</body>
+</html>

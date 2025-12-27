@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENTRE COM - 电脑商店</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        .header { background: #000; color: #fff; padding: 20px; text-align: center; }
+        .header h1 { font-size: 3rem; letter-spacing: 2px; }
+        .offers { display: flex; justify-content: space-around; background: #f0f0f0; padding: 10px 0; margin: 10px 0; }
+        .offers span { color: #ff0000; font-weight: bold; }
+        /* 商品滚动区域样式 */
+        .products-marquee {
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px 0;
+        }
+        /* 商品列表样式 - 横向排列 */
+        .products { 
+            display: flex; 
+            gap: 20px; /* 商品卡片之间的间距 */
+            align-items: center;
+        }
+        .product-card { 
+            width: 250px; /* 固定商品卡片宽度 */
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            text-align: center; 
+            border-radius: 8px; 
+            flex-shrink: 0; /* 防止卡片被挤压变形 */
+        }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; cursor: pointer; }
+        .product-card h3 { margin: 10px 0; }
+        .product-card .price { color: #ff0000; font-size: 1.2rem; font-weight: bold; margin: 10px 0; }
+        .btn { display: inline-block; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; margin-top: 10px; }
+        .btn:hover { background: #333; }
+        .footer { background: #000; color: #fff; text-align: center; padding: 15px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CENTRE COM</h1>
+        <div class="offers">
+            <span>FREE SHIPPING</span>
+            <span>1HR CLICK & COLLECT</span>
+            <span>OPEN 7 DAYS A WEEK</span>
+        </div>
+    </div>
+
+    <!-- 核心：用<marquee>实现自动滚动 -->
+    <div class="products-marquee">
+        <marquee 
+            direction="left"
+            scrollamount="5"  
+            behavior="scroll"
+            onmouseover="this.stop()"
+            onmouseout="this.start()"
+        >
+            <div class="products">
+                <!-- 商品1：笔记本电脑 -->
+                <div class="product-card">
+                    <a href="laptop.html">
+                        <img src="https://picx.zhimg.com/v2-e4d2adb2e945abd047d3c76b9881b8ce_r.webp?source=172ae18b&consumer=ZHI_MENG" alt="高性能笔记本电脑">
+                    </a>
+                    <h3><a href="laptop.html" style="text-decoration: none; color: #000;">高性能游戏笔记本</a></h3>
+                    <div class="price">$2,499</div>
+                    <a href="laptop.html" class="btn">BUY NOW</a>
+                </div>
+
+                <!-- 商品2：台式电脑 -->
+                <div class="product-card">
+                    <a href="desktop.html">
+                        <img src="https://img.alicdn.com/bao/uploaded/i3/654519625/O1CN01kTAmvo2KyJFDyGx6G_!!4611686018427383113-0-item_pic.jpg_500x500q90" alt="组装台式电脑">
+                    </a>
+                    <h3><a href="desktop.html" style="text-decoration: none; color: #000;">定制组装台式机</a></h3>
+                    <div class="price">$3,799</div>
+                    <a href="desktop.html" class="btn">BUY NOW</a>
+                </div>
+
+                <!-- 商品3：游戏耳机 -->
+                <div class="product-card">
+                    <a href="headset.html">
+                        <img src="https://img12.360buyimg.com/n1/s720x720_jfs/t7669/209/2960302710/182980/f410dc/59ed6705Ndad3a44c.jpg" alt="降噪游戏耳机">
+                    </a>
+                    <h3><a href="headset.html" style="text-decoration: none; color: #000;">降噪游戏耳机</a></h3>
+                    <div class="price">$399</div>
+                    <a href="headset.html" class="btn">BUY NOW</a>
+                </div>
+
+                <!-- 商品4：机械键盘 -->
+                <div class="product-card">
+                    <a href="keyboard.html">
+                        <img src="https://img.mp.sohu.com/upload/20160816/ce4677cd8fa04db588f4d87b92cf0989_th.jpg" alt="RGB机械键盘">
+                    </a>
+                    <h3><a href="keyboard.html" style="text-decoration: none; color: #000;">RGB机械键盘</a></h3>
+                    <div class="price">$379</div>
+                    <a href="keyboard.html" class="btn">BUY NOW</a>
+                </div>
+
+                <!-- 商品5：显示器 -->
+                <div class="product-card">
+                    <a href="monitor.html">
+                        <img src="https://img.pconline.com.cn/images/upload/upc/tx/onlinephotolib/2102/09/c1/253152167_1612864349475.jpg" alt="4K高清显示器">
+                    </a>
+                    <h3><a href="monitor.html" style="text-decoration: none; color: #000;">4K高清电竞显示器</a></h3>
+                    <div class="price">$699</div>
+                    <a href="monitor.html" class="btn">BUY NOW</a>
+                </div>
+            </div>
+        </marquee>
+    </div>
+
+    <div class="footer">
+        <p>ACCEPTS AFTERPAY | RETAIL STORES NATIONWIDE | CONTACT: 123-456-7890</p>
+    </div>
+</body>
+</html>
