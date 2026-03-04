@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="OI-algorithm">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/testpoints.zip!/" />
+      <root url="jar://$PROJECT_DIR$/HTML-You-Lihao-8002125310.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
